@@ -104,18 +104,32 @@
 
 <script>
     function detectDevTools() {
+        let open = false;
         const threshold = 160;
-        const devtools = /./;
-        devtools.toString = function() {
-            window.location.href = "about:blank";
-        };
-        console.log("%c", devtools);
 
         setInterval(() => {
-            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+            if (
+                window.outerWidth - window.innerWidth > threshold ||
+                window.outerHeight - window.innerHeight > threshold
+            ) {
+                open = true;
+            } else {
+                open = false;
+            }
+
+            if (open) {
                 window.location.href = "about:blank";
             }
         }, 500);
+
+        setInterval(() => {
+            const start = performance.now();
+            debugger;
+            const end = performance.now();
+            if (end - start > 100) {
+                window.location.href = "about:blank";
+            }
+        }, 1000);
     }
 
     detectDevTools();
