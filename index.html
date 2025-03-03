@@ -103,37 +103,6 @@
 </div>
 
 <script>
-    function detectDevTools() {
-        let open = false;
-        const threshold = 160;
-
-        setInterval(() => {
-            if (
-                window.outerWidth - window.innerWidth > threshold ||
-                window.outerHeight - window.innerHeight > threshold
-            ) {
-                open = true;
-            } else {
-                open = false;
-            }
-
-            if (open) {
-                window.location.href = "about:blank";
-            }
-        }, 500);
-
-        setInterval(() => {
-            const start = performance.now();
-            debugger;
-            const end = performance.now();
-            if (end - start > 100) {
-                window.location.href = "about:blank";
-            }
-        }, 1000);
-    }
-
-    detectDevTools();
-
     document.getElementById("loginForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
